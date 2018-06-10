@@ -1,0 +1,60 @@
+---
+title: "Stream vs rain residuals vs time"
+author: "Ruan van Mazijk"
+date: "31 May 2018"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE)
+```
+
+```{r}
+source(here::here("00_setup.R"))
+rain_river_spread <- LRD_tidy %>%
+    select(source, amnt, date_time) %>%
+    spread(key = source, value = amnt)
+rain_river_spread$Rain[is.na(rain_river_spread$Rain)] <- 0
+d18O_source_spread <- LRD_tidy %>%
+    select(source, d18O, date_time) %>%
+    spread(key = source, value = d18O) %>%
+    as_tibble()
+d2H_source_spread <- LRD_tidy %>%
+    select(source, d2H, date_time) %>%
+    spread(key = source, value = d2H) %>%
+    as_tibble()
+fit_stream_vs_rain <- lm(River ~ Rain, rain_river_spread)
+fit_d2H            <- lm(River ~ Rain, d2H_source_spread)
+fit_d18O           <- lm(River ~ Rain, d18O_source_spread)
+```
+
+Check if residuals depend on time
+
+```{r}
+knitr::kable(broom::tidy(lm(fit_stream_vs_rain$residuals ~ na.exclude(rain_river_spread)$date_time)), caption = "Streamflow vs rainfall")
+broom::glance(lm(fit_stream_vs_rain$residuals ~ na.exclude(rain_river_spread)$date_time))
+```
+
+```{r}
+broom::glance(lm(fit_stream_vs_rain$residuals ~ na.exclude(rain_river_spread)$date_time))
+```
+
+```{r}
+knitr::kable(broom::tidy(lm(fit_d2H$residuals ~ na.exclude(d2H_source_spread)$date_time)), caption = "Stream d2H vs river d2H")
+```
+
+```{r}
+broom::glance(lm(fit_d2H$residuals ~ na.exclude(d2H_source_spread)$date_time))
+```
+
+```{r}
+knitr::kable(broom::tidy(lm(fit_d18O$residuals ~ na.exclude(d18O_source_spread)$date_time)), caption = "Stream d18O vs river d18O")
+```
+
+```{r}
+broom::glance(lm(fit_d18O$residuals ~ na.exclude(d18O_source_spread)$date_time))
+```
+None do!
