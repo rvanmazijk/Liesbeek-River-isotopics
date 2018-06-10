@@ -6,6 +6,8 @@
 
 *^1 Corresponding author: <adam.west@uct.ac.za>, +27 21 650 3628*
 
+![](logos/UCT-logo.png) ![](logos/BIO-logo.png)
+
 This is an open access repository for data-sets and analyses for publication in review, to be in *Water SA*
 
 # How to replicate our results
