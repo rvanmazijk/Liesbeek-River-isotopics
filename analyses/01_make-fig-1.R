@@ -1,7 +1,7 @@
 # Fig. 1. Storm timeline
 # R. van Mazijk, L.K. Smyth
 
-source(here::here("Analyses-v2/00_setup.R"))
+source(here::here("setup.R"))
 
 # Tidy data further for this figure --------------------------------------------
 
@@ -158,6 +158,6 @@ themed_plot <- styled_plot +
 
 fig_1 <- themed_plot
 
-tiff("fig-1.tiff", width = 25, height = 15, units = "cm", res = 500)
+tiff(here::here("figures/fig-1.tiff"), width = 25, height = 15, units = "cm", res = 500)
 fig_1
 dev.off()

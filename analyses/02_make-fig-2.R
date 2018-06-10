@@ -1,7 +1,7 @@
 # Fig. 2. Stream vs rain
 # R. van Mazijk
 
-source(here::here("Analyses-v2/00_setup.R"))
+source(here::here("setup.R"))
 
 # Tidy data further for this figure --------------------------------------------
 
@@ -226,6 +226,6 @@ arranged_panels <- cowplot::plot_grid(
 
 fig_2 <- arranged_panels
 
-tiff("fig-2.tiff", width = 10, height = 20, units = "cm", res = 500)
+tiff(here::here("figures/fig-2.tiff"), width = 10, height = 20, units = "cm", res = 500)
 fig_2
 dev.off()

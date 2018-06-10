@@ -1,7 +1,7 @@
 # Bayesian mixing model of Liesbeek stormwater data"
 # R. van Mazijk
 
-source(here::here("Analyses-v2/04_amnt-weighted-iso-and-p_v2.R"))
+source(here::here("analyses/04_amount-weighted-p-and-iso.R"))
 
 # Prepare the data -------------------------------------------------------------
 

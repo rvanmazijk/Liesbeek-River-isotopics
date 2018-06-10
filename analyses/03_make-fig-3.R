@@ -1,7 +1,7 @@
 # Fig. 3. Meteoric water plot (d2H vs d18O)
 # R. van Mazijk
 
-source(here::here("Analyses-v2/00_setup.R"))
+source(here::here("setup.R"))
 
 # Find LMWL --------------------------------------------------------------------
 
@@ -184,7 +184,7 @@ themed_plot <- annotated_plot +
 
 fig_3 <- themed_plot
 
-tiff("fig-3.tiff", width = 15, height = 10, units = "cm", res = 500)
+tiff(here::here("figures/fig-3.tiff"), width = 15, height = 10, units = "cm", res = 500)
 fig_3
 dev.off()
 
