@@ -52,20 +52,6 @@ LRD_cumul_rain <- LRD_tidy_fig_1 %>%
     filter(source_type == "Rain_amnt") %>%
     mutate(cum_amnt = cumsum(amnt))
 
-insert_cumul_rain_type <- function(x) {
-    x$type %<>% as.character()
-    for (i in 1:nrow(x)) {
-        x$type[i] <-
-            if (x$source_type[i] == "cum_rain") {
-                "cum_rain"
-            } else {
-                x$type[i]
-            }
-    }
-    x$type %<>% as.factor()
-    return(x)
-}
-
 LRD_tidy_gather_with_cumul_rain <- LRD_cumul_rain %>%
     transmute(code        = code,
               source      = source,
