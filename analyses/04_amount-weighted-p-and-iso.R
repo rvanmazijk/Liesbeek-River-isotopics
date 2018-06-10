@@ -10,7 +10,9 @@
 #         \delta_{rain_{t}} - \delta_{baseflow}}
 # $$
 
-source(here::here("Analyses-v2/00_setup.R"))
+source(here::here("setup.R"))
+source(here::here("functions/p_iso.R"))
+source(here::here("functions/dE_cum_amnt_weighted.R"))
 
 # Define baseflow isotope values -----------------------------------------------
 
@@ -40,26 +42,6 @@ LRD_rain <- LRD_tidy %>%
                     d2H = 0,
                     source = "Rain",
                     amnt = 0))
-
-# Define functions to calc prop from river or rainfall -------------------------
-
-p_iso <- function(stream_value, baseflow, rain_value) {
-    return(
-        (stream_value - baseflow) /
-        (rain_value - baseflow)
-    )
-}
-
-dE_cum_amnt_weighted <- function(x) {
-    out <- x %>%
-        mutate(
-            d18O_x_amnt = d18O * amnt,
-            d2H_x_amnt = d2H * amnt) %>%
-        summarise(
-            weighted_d18O = sum(d18O_x_amnt) / sum(amnt),
-            weighted_d2H = sum(d2H_x_amnt) / sum(amnt))
-    return(out)
-}
 
 # Initialise empty columns in data-frame ---------------------------------------
 
@@ -194,10 +176,10 @@ fig_5 <- ggplot(LRD_new_for_plot,
           panel.grid.minor.x = element_line(colour = "grey75", linetype = "dashed"),
           axis.text.x        = element_text(angle = 0))
 
-tiff("fig-4.tiff", width = 15, height = 10, units = "cm", res = 500)
+tiff(here::here("figures/fig-4.tiff"), width = 15, height = 10, units = "cm", res = 500)
 fig_4
 dev.off()
 
-tiff("fig-5.tiff", width = 15, height = 10, units = "cm", res = 500)
+tiff(here::here("figures/fig-5.tiff"), width = 15, height = 10, units = "cm", res = 500)
 fig_5
 dev.off()
