@@ -9,11 +9,7 @@ p_load(tidyverse, here, magrittr, readxl, stringr, lubridate, cowplot)
 
 # Import data ------------------------------------------------------------------
 
-LRD_tidy <- read_csv(here::here("liesbeeck-data-tidy.csv"))[, -1]
+LRD_tidy <- read_csv(here::here("data/liesbeeck-data-tidy.csv"))
 colnames(LRD_tidy)[4] <- "source"
-
-harris_uct <- read_csv(here::here("harris-uct.csv"))
-
-extra_sites <- read_csv(here::here("johndaybldg-skeletongorge.csv")) %>%
-    mutate(date_time_start = ymd_hm(date_time_start),
-           date_time_end = ymd_hm(date_time_end))
+harris_uct <- read_csv(here::here("data/harris-uct.csv"))
+extra_sites <- read_csv(here::here("data/extra-sites.csv"))
