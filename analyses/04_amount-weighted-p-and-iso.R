@@ -2,14 +2,6 @@
 # and Fig. 5. (Running proportion of streamflow made up by rain water)
 # R. van Mazijk
 
-# Let the proportion of streamwater that is derived
-# from rainfall at time $t$ be $p_{rain_{t}}$, such that
-# $$
-#     p_{rain_{t}} = \frac{
-#         \delta_{stream_{t}} - \delta_{baseflow}}{
-#         \delta_{rain_{t}} - \delta_{baseflow}}
-# $$
-
 source(here::here("setup.R"))
 
 # Define baseflow isotope values -----------------------------------------------
