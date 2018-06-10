@@ -13,3 +13,8 @@ LRD_tidy <- read_csv(here::here("data/liesbeeck-data-tidy.csv"))
 colnames(LRD_tidy)[4] <- "source"
 harris_uct <- read_csv(here::here("data/harris-uct.csv"))
 extra_sites <- read_csv(here::here("data/extra-sites.csv"))
+
+# Define functions -------------------------------------------------------------
+
+my_functions <- list.files(here("functions"), full.names = TRUE)
+map(my_functions, source)

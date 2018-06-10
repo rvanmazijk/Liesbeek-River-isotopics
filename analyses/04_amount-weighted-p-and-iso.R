@@ -11,8 +11,6 @@
 # $$
 
 source(here::here("setup.R"))
-source(here::here("functions/p_iso.R"))
-source(here::here("functions/dE_cum_amnt_weighted.R"))
 
 # Define baseflow isotope values -----------------------------------------------
 
