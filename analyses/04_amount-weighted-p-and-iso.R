@@ -70,6 +70,10 @@ LRD_new <- LRD_stream
 
 # Look at final cumulative numbers:
 select(LRD_new[23, ], date_time:d2H_p_t)
+sd(LRD_tidy$d18O[LRD_tidy$source == "River"])
+sd(LRD_tidy$d2H[LRD_tidy$source == "River"])
+sd(LRD_tidy$d18O[LRD_tidy$source == "Rain"])
+sd(LRD_tidy$d2H[LRD_tidy$source == "Rain"])
 # Use this in Table 1.
 
 # Visualise results ------------------------------------------------------------
