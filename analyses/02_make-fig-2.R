@@ -26,14 +26,8 @@ d2H_source_spread <- LRD_tidy %>%
 # Linear fits used in plots ----------------------------------------------------
 
 fit_stream_vs_rain <- lm(River ~ Rain, rain_river_spread)
-fit_d2H            <- lm(River ~ Rain, d2H_source_spread)
-fit_d18O           <- lm(River ~ Rain, d18O_source_spread)
-
-# Check if residuals depend on time
-broom::tidy(lm(fit_stream_vs_rain$residuals ~ na.exclude(rain_river_spread )$date_time))
-broom::tidy(lm(fit_d2H$residuals            ~ na.exclude(d2H_source_spread )$date_time))
-broom::tidy(lm(fit_d18O$residuals           ~ na.exclude(d18O_source_spread)$date_time))
-# None do!
+fit_d2H <- lm(River ~ Rain, d2H_source_spread)
+fit_d18O <- lm(River ~ Rain, d18O_source_spread)
 
 # Stream-flow vs rain-fall -----------------------------------------------------
 
@@ -96,27 +90,6 @@ make_panel_bc <- function(isotope = c("d2H", "d18O")) {
         ggplot(data = switch(isotope,
             "d2H" = d2H_source_spread,
             "d18O" = d18O_source_spread)) +
-        #geom_abline(
-        #    intercept = 0,
-        #    slope = 1,
-        #    linetype = "dashed",
-        #    col = "grey50",
-        #    size = 0.7
-        #) +
-        #annotate(
-        #    geom =  "text",
-        #    label = "1:1",
-        #    x = switch(isotope,
-        #        "d2H" = -12,
-        #        "d18O" = -3
-        #    ),
-        #    y = switch(isotope,
-        #        "d2H" = -7,
-        #        "d18O" = -2.25
-        #    ),
-        #    col = "grey50",
-        #    size = 5
-        #) +
         geom_point(aes(x = Rain, y = River),
                    col = switch(isotope,
                        "d2H" = "#599f37",
@@ -226,6 +199,6 @@ arranged_panels <- cowplot::plot_grid(
 
 fig_2 <- arranged_panels
 
-tiff(here::here("figures/fig-2.tiff"), width = 10, height = 20, units = "cm", res = 500)
+tiff(here::here("figures/fig-2.tiff"), width = 10, height = 20, units = "cm", res = 300)
 fig_2
 dev.off()

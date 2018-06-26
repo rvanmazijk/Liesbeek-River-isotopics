@@ -36,11 +36,11 @@ river_times <- LRD_tidy_fig_1 %>%
     select(date_time) %>%
     as.data.frame()
 no_rain <- data.frame(
-    code        = rep("NO_RAIN",   10),
-    source      = rep("Rain",      10),
-    date_time   = anti_join(river_times, rain_times),
-    type        = rep("amnt",      10),
-    amnt        = rep(0,           10),
+    code = rep("NO_RAIN", 10),
+    source = rep("Rain", 10),
+    date_time = anti_join(river_times, rain_times),
+    type = rep("amnt", 10),
+    amnt = rep(0, 10),
     source_type = rep("Rain_amnt", 10)
 )
 LRD_tidy_fig_1 %<>% rbind(no_rain)
@@ -53,11 +53,11 @@ LRD_cumul_rain <- LRD_tidy_fig_1 %>%
     mutate(cum_amnt = cumsum(amnt))
 
 LRD_tidy_gather_with_cumul_rain <- LRD_cumul_rain %>%
-    transmute(code        = code,
-              source      = source,
-              date_time   = date_time,
-              type        = type,
-              amnt        = cum_amnt,
+    transmute(code = code,
+              source = source,
+              date_time = date_time,
+              type = type,
+              amnt = cum_amnt,
               source_type = rep("cum_rain", times = nrow(LRD_cumul_rain))) %>%
     rbind(LRD_tidy_fig_1) %>%
     insert_cumul_rain_type()
@@ -144,6 +144,6 @@ themed_plot <- styled_plot +
 
 fig_1 <- themed_plot
 
-tiff(here::here("figures/fig-1.tiff"), width = 25, height = 15, units = "cm", res = 500)
+tiff(here::here("figures/fig-1.tiff"), width = 25, height = 15, units = "cm", res = 300)
 fig_1
 dev.off()
