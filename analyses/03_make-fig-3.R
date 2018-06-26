@@ -14,78 +14,52 @@ fit_river <- lm(d2H ~ d18O, LRD_tidy %>% filter(source == "River"))
 
 # Amount-weighted iso values ---------------------------------------------------
 
-# For rain near Liesbeek
-LR_site <- LRD_tidy %>%
-    filter(source == "Rain") %>%
-    # Calculate amount weighted isotope scores from near-Liesbeeck site
-    mutate(d18O_x_amnt = d18O * amnt,
-           d2H_x_amnt  = d2H * amnt) %>%
-    summarise(weighted_d18O = sum(d18O_x_amnt) / sum(amnt),
-              weighted_d2H = sum(d2H_x_amnt) / sum(amnt),
-              sd(d18O),
-              sd(d2H))
-
-# UCT & Skeleton Gorge
+# For rain near Liesbeek, UCT & Skeleton Gorge
 extra_sites
 # Note:
-# JDB = John Day Bldg, UCT Upper Campus,
+# MOW = Mowbray, Cape Town
+# JDB = John Day Bldg, UCT Upper Campus
 # SKG = Skeleton Gorge, Table Mountain
 
 # For MAP from Harris data set, w/ SD for error bars
 harris_MAP <- harris_uct %>%
-    select(month, dD, d18O, amount) %>%
+    select(dD, d18O, amount) %>%
     rename(d2H = dD, amnt = amount) %>%
-    group_by(month) %>%
     mutate(d2H_x_amnt = d2H * amnt,
            d18O_x_amnt = d18O * amnt) %>%
-    summarise(weighted_d18O = sum(d18O_x_amnt) / sum(amnt),
-              weighted_d2H = sum(d2H_x_amnt) / sum(amnt)) %>%
-    summarise(mean(weighted_d18O),
-              sd(weighted_d18O),
-              mean(weighted_d2H),
-              sd(weighted_d2H))
+    summarise(weighted_d2H = sum(d2H_x_amnt) / sum(amnt),
+              weighted_d18O = sum(d18O_x_amnt) / sum(amnt))
 
 # Prestorm streamwater isotope values w/ SD for error bars
-prestorm <- LRD_tidy %>%
+baseflow <- LRD_tidy %>%
     filter(source == "River") %>%
     arrange(date_time) %>%
     slice(1:3) %>%
-    summarise(mean(d18O),
-              sd(d18O),
-              mean(d2H),
-              sd(d2H))
+    mutate(d2H_x_amnt = d2H * amnt,
+           d18O_x_amnt = d18O * amnt) %>%
+    summarise(weighted_d2H = sum(d2H_x_amnt) / sum(amnt),
+              weighted_d18O = sum(d18O_x_amnt) / sum(amnt))
 
 # Compile
-amnt_weighted_iso <-
-    tibble(point = c("Stream baseflow",
-                      "MAP",
-                      "Mowbray",
-                      "Skeleton Gorge",
-                      "UCT"),
-            d2H_avg = c(prestorm$`mean(d2H)`,
-                        harris_MAP$`mean(weighted_d2H)`,
-                        LR_site$weighted_d2H,
-                        extra_sites$d2H[2],
-                        extra_sites$d2H[1]),
-            d2H_sd = c(prestorm$`sd(d2H)`,
-                       harris_MAP$`sd(weighted_d2H)`,
-                       LR_site$`sd(d2H)`,
-                       NA,
-                       NA),
-            d18O_avg = c(prestorm$`mean(d18O)`,
-                         harris_MAP$`mean(weighted_d18O)`,
-                         LR_site$weighted_d18O,
-                         extra_sites$d18O[2],
-                         extra_sites$d18O[1]),
-            d18O_sd = c(prestorm$`sd(d18O)`,
-                        harris_MAP$`sd(weighted_d18O)`,
-                        LR_site$`sd(d18O)`,
-                        NA,
-                        NA)) %>%
-    mutate(d2H_lower = d2H_avg - d2H_sd,
-           d2H_upper = d2H_avg + d2H_sd,
-           d18O_lower = d18O_avg - d18O_sd,
-           d18O_upper = d18O_avg + d18O_sd)
+amnt_weighted_iso <- tibble(
+    point = c(
+        "Stream baseflow",
+        "MAP",
+        "Mowbray",
+        "Skeleton Gorge",
+        "UCT"
+    ),
+    d2H_avg = c(
+        baseflow$weighted_d2H,
+        harris_MAP$weighted_d2H,
+        extra_sites$d2H
+    ),
+    d18O_avg = c(
+        baseflow$weighted_d18O,
+        harris_MAP$weighted_d18O,
+        extra_sites$d18O
+    )
+)
 amnt_weighted_iso$point %<>% factor(levels = c(
     "Stream baseflow",
     "MAP",
@@ -123,27 +97,11 @@ base_plot <- LRD_tidy %>%
              size = 5)
 
 annotated_plot <- base_plot +
-    geom_errorbar(data = amnt_weighted_iso,
-                  aes(d18O_avg, ymin = d2H_lower, ymax = d2H_upper,
-                      col = point),
-                  width = 0,
-                  show.legend = FALSE) +
-    geom_errorbarh(data = amnt_weighted_iso,
-                   aes(d18O_avg, d2H_avg, xmin = d18O_lower, xmax = d18O_upper,
-                       col = point),
-                   height = 0,
-                   show.legend = FALSE) +
     geom_point(data = amnt_weighted_iso,
                aes(d18O_avg, d2H_avg,
                    shape = point, col = point),
                size = 3) +
-    geom_point(data = LRD_tidy %>%
-                   filter(source == "River") %>%
-                   select(d18O, d2H) %>%
-                   slice(-c(1:3)),  # Exclude baseflow
-               aes(d18O, d2H),
-               size = 1) +  # To add this legend manually
-    scale_shape_manual(name = "", values = c(19, 19, 19, 17, 15)) +
+    scale_shape_manual(name = "", values = c(19, 15, 19, 17, 15)) +
     scale_color_manual(name = "", values = c("#000000",
                                              "grey50",
                                              "#205979",
@@ -178,13 +136,12 @@ annotated_plot <- base_plot +
 
 themed_plot <- annotated_plot +
     theme_bw() +
-    theme(panel.grid       = element_blank(),
+    theme(panel.grid = element_blank(),
           strip.background = element_rect(fill = NA, colour = NA),
-          strip.text.x     = element_blank())
+          strip.text.x = element_blank())
 
 fig_3 <- themed_plot
 
-tiff(here::here("figures/fig-3.tiff"), width = 15, height = 10, units = "cm", res = 500)
+tiff(here::here("figures/fig-3.tiff"), width = 15, height = 10, units = "cm", res = 300)
 fig_3
 dev.off()
-
