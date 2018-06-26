@@ -1,6 +1,5 @@
-# Fig. 4. (Running isotope values' averages)
-# and Fig. 5. (Running proportion of streamflow made up by rain water)
-# R. van Mazijk
+# Mass balance model of rainfall contribution to streamflow
+# Ruan van Mazijk
 
 source(here::here("setup.R"))
 
