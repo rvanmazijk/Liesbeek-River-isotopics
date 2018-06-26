@@ -63,16 +63,6 @@ make_panel_a <- function() {
                  col = "#000000",
                  size = 4)
 
-    # TODO: beta needed?
-    #annotate(
-    #  geom = "text", parse = T,
-    #  label = paste0(
-    #    "italic(beta)[1] == ",
-    #    format(summary(fit_stream_vs_rain)$coefficients[2], digits = 4)
-    #  ),
-    #  x = 10, y = 1000, size = 4, col = "#0f4969"
-    #) +
-
     themed_plot <- annotated_plot +
         theme_bw() +
         theme(panel.grid = element_blank())
