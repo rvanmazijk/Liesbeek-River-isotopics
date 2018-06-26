@@ -1,5 +1,5 @@
 # Fig. 1. Storm timeline
-# R. van Mazijk, L.K. Smyth
+# Ruan van Mazijk, Lucy K. Smyth
 
 source(here::here("setup.R"))
 

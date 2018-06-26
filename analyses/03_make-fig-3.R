@@ -1,5 +1,5 @@
 # Fig. 3. Meteoric water plot (d2H vs d18O)
-# R. van Mazijk
+# Ruan van Mazijk
 
 source(here::here("setup.R"))
 
@@ -33,9 +33,9 @@ extra_sites
 
 # For MAP from Harris data set, w/ SD for error bars
 harris_MAP <- harris_uct %>%
-    select(Year, month, dD, d18O, amount) %>%
-    rename(year = Year, d2H = dD, amnt = amount) %>%
-    group_by(year) %>% ##################################
+    select(month, dD, d18O, amount) %>%
+    rename(d2H = dD, amnt = amount) %>%
+    group_by(month) %>%
     mutate(d2H_x_amnt = d2H * amnt,
            d18O_x_amnt = d18O * amnt) %>%
     summarise(weighted_d18O = sum(d18O_x_amnt) / sum(amnt),

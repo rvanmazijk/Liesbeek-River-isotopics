@@ -1,5 +1,5 @@
-# Liesbeeck River Data water isotope & hydrology data analyses
-# Ruan. van Mazijk
+# Liesbeeck River water isotope & hydrograph data analyses
+# Ruan van Mazijk
 
 # Install/load packages --------------------------------------------------------
 

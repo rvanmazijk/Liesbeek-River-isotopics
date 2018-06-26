@@ -1,5 +1,5 @@
 # Fig. 2. Stream vs rain
-# R. van Mazijk
+# Ruan van Mazijk
 
 source(here::here("setup.R"))
 
