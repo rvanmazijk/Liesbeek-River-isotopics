@@ -1,0 +1,98 @@
+---
+title: "Uncertainty propagation rules"
+author: "Ruan van Mazijk"
+output: html_document
+---
+
+Let $p_E$ be the proportion of streamflow derived from rainfall according to an isotope $E$, where
+
+$$
+    p_E = \frac{E_{streamflow} - E_{baseflow}}{E_{rain} - E_{baseflow}}
+$$
+
+Our uncertainty rules are as follows. Let $q$ be some quantity, and $u_q$ be its uncertainty, where $q$ is a function of variables $x$, $y$ and $z$.
+
+For **constants**
+
+$$
+    q = Bx \\
+    \frac{u_q}{q} = \frac{u_x}{x}
+$$
+
+For **sums**
+
+$$
+    q = x \pm y \pm z \\
+    u_q = \sqrt{u_x^2 +u_y^2 + u_z^2}
+$$
+
+And for **products/quotients**
+
+$$
+    q = xyz \\
+    \frac{u_q}{|q|} = \sqrt{
+        \left( \frac{u_x}{x} \right)^2 + 
+        \left( \frac{u_y}{y} \right)^2 + 
+        \left( \frac{u_z}{z} \right)^2
+    }
+$$
+
+As such, for our analysis, we propagate the uncertainty as follows, relying on our known uncertainty in measuring isotope values $u_E$
+
+$$
+    p_E = \frac{E_{streamflow} - E_{baseflow}}{E_{rain} - E_{baseflow}} \\
+    \frac{u_{p_E}}{|p_E|} = \sqrt{
+        \left(
+            \frac{
+                u(E_{streamflow} - E_{baseflow})
+            }{
+                E_{streamflow} - E_{baseflow}
+            } 
+        \right)^2 + 
+        \left( 
+            \frac{
+                u(E_{rain} - E_{baseflow})
+            }{
+                E_{rain} - E_{baseflow}
+            } 
+        \right)^2
+    }
+$$
+
+where
+
+$$
+    u(E_{streamflow} - E_{baseflow}) = u(E_{rain} - E_{baseflow}) = \sqrt{u_E^2 + u_E^2}
+$$
+
+such that
+
+$$
+    u_{p_E} = |p_E| \times \sqrt{
+        \left(
+            \frac{
+                \sqrt{u_E^2 + u_E^2}
+            }{
+                E_{streamflow} - E_{baseflow}
+            } 
+        \right)^2 + 
+        \left( 
+            \frac{
+                \sqrt{u_E^2 + u_E^2}
+            }{
+                E_{rain} - E_{baseflow}
+            } 
+        \right)^2
+    }
+$$
+
+We then average $p_{\delta^{2}H}$ and $p_{\delta^{18}O}$, each with their own uncertainty derived above, as follows
+
+$$
+    p =  \frac{p_{\delta^{18}O} + p_{\delta^{2}H}}{2} \\
+    u_p = |p| \times \frac{
+        \sqrt{u_{p_{\delta^{18}O}} + u_{p_{\delta^{2}H}}}
+    }{
+        p_{\delta^{18}O} + p_{\delta^{2}H}
+    }
+$$
