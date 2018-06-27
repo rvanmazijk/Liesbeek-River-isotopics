@@ -1,8 +1,24 @@
 ---
-title: "Uncertainty propagation rules"
+title: "Isotope analytical uncertainty propagation"
 author: "Ruan van Mazijk"
-output: html_document
+output: 
+  html_document:
+    number_sections: yes
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE, 
+    warning = FALSE
+)
+```
+
+```{r}
+source(here::here("analyses/04_mass-balance.R"))
+```
+
+Here I (1) state the uncertainty propagation rules plainly, (2) apply them to our mass-balance model equation and calculate the results, and finally (3) I explore the the derivation of Genereux's (1998) isotopic tracer component uncertainty equations and how they, sadly, differ to my arithmetic propagation in section (2).
 
 # Uncertainty propagation rules
 
@@ -46,20 +62,10 @@ As such, for our analysis, we propagate the uncertainty as follows, relying on o
 \begin{align}
     p_E &= \frac{E_{streamflow} - E_{baseflow}}{E_{rain} - E_{baseflow}} \\
     \therefore u_{p_E} &= |p_E| \sqrt{
-        \left(
-            \frac{
-                u_{[E_{streamflow} - E_{baseflow}]}
-            }{
-                E_{streamflow} - E_{baseflow}
-            } 
-        \right)^2 + 
-        \left( 
-            \frac{
-                u_{[E_{rain} - E_{baseflow}]}
-            }{
-                E_{rain} - E_{baseflow}
-            } 
-        \right)^2
+        \left( \frac{u_{[E_{streamflow} - E_{baseflow}]}}
+                    {E_{streamflow} - E_{baseflow}} \right)^2 + 
+        \left( \frac{u_{[E_{rain} - E_{baseflow}]}}
+                    {E_{rain} - E_{baseflow}} \right)^2
     }
 \end{align}
 
@@ -73,63 +79,86 @@ such that
 
 \begin{align} \tag{2.2}
     u_{p_E} = |p_E| \sqrt{
-        \left(
-            \frac{
-                \sqrt{u_E^2 + u_E^2}
-            }{
-                E_{streamflow} - E_{baseflow}
-            } 
-        \right)^2 + 
-        \left( 
-            \frac{
-                \sqrt{u_E^2 + u_E^2}
-            }{
-                E_{rain} - E_{baseflow}
-            } 
-        \right)^2
+        \left( \frac{\sqrt{u_E^2 + u_E^2}}
+                    {E_{streamflow} - E_{baseflow}} \right)^2 + 
+        \left( \frac{\sqrt{u_E^2 + u_E^2}}
+                    {E_{rain} - E_{baseflow}} \right)^2
     }
 \end{align}
 
 We then average $p_{\delta^{2}H}$ and $p_{\delta^{18}O}$, each with their own uncertainty derived above, as follows
 
 \begin{align} \tag{2.3}
-    p &= \frac{p_{\delta^{18}O} + p_{\delta^{2}H}}{2} \\
-    \therefore u_p &= |p| \frac{
-        \sqrt{u_{p_{\delta^{18}O}} + u_{p_{\delta^{2}H}}}
-    }{
-        p_{\delta^{18}O} + p_{\delta^{2}H}
-    }
+    p &= \frac{p_{\delta^{18}O} + p_{\delta^{2}H}}
+              {2} \\
+    \therefore u_p &= |p| \frac{\sqrt{u_{p_{\delta^{18}O}} + u_{p_{\delta^{2}H}}}}
+                               {p_{\delta^{18}O} + p_{\delta^{2}H}}
 \end{align}
+
+For our study, we combined long term analytical precision and accuracy using (1.2)
+
+\begin{align}
+    u_{\delta^{18}O} &= \sqrt{`r precision$d18O`‰^2 + `r accuracy$d18O`‰^2} \\
+    &= `r u$d18O`‰ \\
+    u_{\delta^{2}H} &= \sqrt{`r precision$d2H`‰^2 + `r accuracy$d2H`‰^2} \\
+    &= `r u$d2H`‰
+\end{align}
+
+As such, we calculate our $p_E$ values using (2.1)
+
+\begin{align}
+    p_{\delta^{18}O} &= \frac{`r streamflow$d18O`‰ - `r baseflow$d18O`‰}
+                             {`r rain$d18O`‰ - `r baseflow$d18O`‰} \\
+    &= `r p$d18O` \\
+    p_{\delta^{2}H} &= \frac{`r streamflow$d2H`‰ - `r baseflow$d2H`‰}
+                            {`r rain$d2H`‰ - `r baseflow$d2H`‰} \\
+    &= `r p$d2H`
+\end{align}
+
+and their uncertainties (using (2.2))
+
+\begin{align}
+    u_{p_{\delta^{18}O}} &= |`r p$d18O`| \sqrt{
+        \left( \frac{\sqrt{`r u$d18O`‰^2 + `r u$d18O`‰^2}}
+                    {`r streamflow$d18O` - `r baseflow$d18O`} \right) ^ 2 +
+        \left( \frac{\sqrt{`r u$d18O`‰^2 + `r u$d18O`‰^2}}
+                    {`r rain$d18O` - `r baseflow$d18O`} \right) ^ 2
+    } \\
+    &= `r u_p$d18O`‰ \\
+    u_{p_{\delta^{2}H}} &= |`r p$d2H`| \sqrt{
+        \left( \frac{\sqrt{`r u$d2H`‰^2 + `r u$d2H`‰^2}}
+                    {`r streamflow$d2H` - `r baseflow$d2H`} \right) ^ 2 +
+        \left( \frac{\sqrt{`r u$d2H`‰^2 + `r u$d2H`‰^2}}
+                    {`r rain$d2H` - `r baseflow$d2H`} \right) ^ 2
+    } \\
+    &= `r u_p$d2H`‰
+\end{align}
+
+We then use (2.3) to derive $p$ proper
+
+\begin{align}
+    p &= \frac{`r p$d18O` + `r p$d2H`}
+              {2} \\
+    &= `r p_rain` \\
+    \therefore u_p &= |`r p_rain`| \frac{ \sqrt{`r u_p$d18O`‰ + `r u_p$d2H`‰}}
+                                        {`r p$d18O` + `r p$d2H`} \\
+    &= `r u_p_rain`
+\end{align}
+
+Thus, we can conclude that, following this method, the Liesbeek River streamflow during our storm constituted 101% ± 12.3% rain-water.
 
 # Genereux's propagation
 
-(See Genereux (1998) *Water Resources Research* 34(4):915--919)
-
-Knowing Equations (1.1)--(1.3), applying them to (2.1) we get
+Knowing Equations (1.1)--(1.3), applying them to (2.1) Genereux got
 
 \begin{align} \tag{3.1}
     u_{p_E} = \sqrt{
-        \left(
-            u_{E_{baseflow}} \frac{
-                E_{rain} - E_{streamflow}
-            }{
-                \left( E_{rain} - E_{baseflow} \right)^2
-            }
-        \right)^2 +
-        \left(
-            u_{E_{rain}} \frac{
-                E_{streamflow} - E_{baseflow}
-            }{
-                \left( E_{rain} - E_{baseflow} \right)^2
-            }
-        \right)^2 +
-        \left(
-            u_{E_{streamflow}} \frac{
-                -1
-            }{
-                 E_{rain} - E_{baseflow}
-            }
-        \right)^2
+        \left( u_{E_{baseflow}} \frac{E_{rain} - E_{streamflow}}
+                                     {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
+        \left( u_{E_{rain}} \frac{E_{streamflow} - E_{baseflow}}
+                                 {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
+        \left( u_{E_{streamflow}} \frac{-1}
+                                       {E_{rain} - E_{baseflow}} \right)^2
     }
 \end{align}
 
@@ -144,104 +173,46 @@ Consequently
 \begin{align}
     u_{p_E} 
     &= \sqrt{
-        \left(
-            u_E \frac{
-                E_{rain} - E_{streamflow}
-            }{
-                \left( E_{rain} - E_{baseflow} \right)^2
-            }
-        \right)^2 +
-        \left(
-            u_E \frac{
-                E_{streamflow} - E_{baseflow}
-            }{
-                \left( E_{rain} - E_{baseflow} \right)^2
-            }
-        \right)^2 +
-        \left(
-            u_E \frac{
-                -1
-            }{
-                 E_{rain} - E_{baseflow}
-            }
-        \right)^2
+        \left( u_E \frac{E_{rain} - E_{streamflow}}
+                        {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
+        \left( u_E \frac{E_{streamflow} - E_{baseflow}}
+                        {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
+        \left( u_E \frac{-1}
+                        {E_{rain} - E_{baseflow}} \right)^2
     } \\
     &= \sqrt{
-        u_E^2 \left(
-            \left(
-                \frac{
-                    E_{rain} - E_{streamflow}
-                }{
-                    \left( E_{rain} - E_{baseflow} \right)^2
-                }
-            \right)^2 +
-            \left(
-                \frac{
-                    E_{streamflow} - E_{baseflow}
-                }{
-                    \left( E_{rain} - E_{baseflow} \right)^2
-                }
-            \right)^2 +
-            \left(
-                \frac{
-                    -1
-                }{
-                     E_{rain} - E_{baseflow}
-                }
-            \right)^2
-        \right)
+        u_E^2 
+        \left( \left( \frac{E_{rain} - E_{streamflow}}
+                           {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
+        \left( \frac{E_{streamflow} - E_{baseflow}}
+                    {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
+        \left( \frac{-1}
+                    {E_{rain} - E_{baseflow}} \right)^2 \right)
     } \\
     &= \sqrt{
-        u_E^2 \left(
-            \left(
-                \frac{
-                    \left( 1 - p_E \right)
-                }{
-                    \left( E_{rain} - E_{baseflow} \right)
-                }
-            \right)^2 +
-            \left(
-                \frac{
-                    p_E
-                }{
-                    \left( E_{rain} - E_{baseflow} \right)
-                }
-            \right)^2 +
-            \frac{
-                1
-            }{
-                 \left( E_{rain} - E_{baseflow} \right)^2
-            }
-        \right)
+        u_E^2 
+        \left(\left(\frac{\left( 1 - p_E \right)}
+                         {\left( E_{rain} - E_{baseflow} \right)} \right)^2 +
+              \left(\frac{p_E}
+                         {\left( E_{rain} - E_{baseflow} \right)} \right)^2 +
+              \frac{1}
+                   {\left( E_{rain} - E_{baseflow} \right)^2} \right)
     } \\
     &= \sqrt{
-        u_E^2 \left( \frac{
-            \left( 1 - p_E \right)^2
-        }{
-            \left( E_{rain} - E_{baseflow} \right)^2
-        } +
-        \frac{
-            p_E^2
-        }{
-            \left( E_{rain} - E_{baseflow} \right)^2
-        } +
-        \frac{
-            1
-        }{
-             \left( E_{rain} - E_{baseflow} \right)^2
-        } \right)
+        u_E^2 
+        \left( \frac{\left( 1 - p_E \right)^2}
+                    {\left( E_{rain} - E_{baseflow} \right)^2} +
+               \frac{p_E^2}
+                    {\left( E_{rain} - E_{baseflow} \right)^2} +
+               \frac{1}
+                    {\left( E_{rain} - E_{baseflow} \right)^2} \right)
     } \\
     &= \sqrt{
-        u_E^2 \frac{
-            \left( 1 - p_E \right)^2 + p_E^2 + 1
-        }{
-            \left( E_{rain} - E_{baseflow} \right)^2
-        }
+        u_E^2 \frac{\left( 1 - p_E \right)^2 + p_E^2 + 1}
+                   {\left( E_{rain} - E_{baseflow} \right)^2}
     } \\
-    &= u_E \frac{
-        \left( 1 - p_E \right) + p_E + 1
-    }{
-        E_{rain} - E_{baseflow}
+    &= u_E \frac{\left( 1 - p_E \right) + p_E + 1}
+                {E_{rain} - E_{baseflow}
     } \\
 \end{align}
 
@@ -251,4 +222,10 @@ So that finally
     \therefore u_{p_E} = u_E \frac{2}{E_{rain} - E_{baseflow}}
 \end{align}
 
-**Problem: (2.2) ≠ (3.2)**
+With this approach, I get $p_{\delta^{18}O} = `r p$d18O` \pm `r u_p_d18O_Genereux`$ and $p_{\delta^{2}H} = `r p$d2H` \pm `r u_p_d2H_Genereux`$, such that following (2.3) $p = `r p_rain_Genereux` \pm `r u_p_rain_Genereux`$.
+
+**Problem: $u_p$ from (2.2) ≠ that from (3.2)**
+
+# References {-}
+
+Genereux (1998) *Water Resources Research* 34(4):915--919
