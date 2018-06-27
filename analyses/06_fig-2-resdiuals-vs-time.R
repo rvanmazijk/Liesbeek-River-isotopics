@@ -1,5 +1,5 @@
 # Regressing Fig. 2. residuals against time
-# R. van Mazijk
+# Ruan van Mazijk
 
 source(here::here("setup.R"))
 

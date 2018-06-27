@@ -1,5 +1,5 @@
 # Calculate total streamflow
-# R. van Mazijk
+# Ruan van Mazijk
 
 source(here::here("setup.R"))
 
