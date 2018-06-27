@@ -245,56 +245,6 @@ $(document).ready(function () {
 <span class="math display">\[\begin{align}
     u_{E_{streamflow}} = u_{E_{rain}} = u_{E_{baseflow}} = u_E
 \end{align}\]</span>
-<p>Consequently</p>
-<span class="math display">\[\begin{align}
-    u_{p_E} 
-    &amp;= \sqrt{
-        \left( u_E \frac{E_{rain} - E_{streamflow}}
-                        {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
-        \left( u_E \frac{E_{streamflow} - E_{baseflow}}
-                        {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
-        \left( u_E \frac{-1}
-                        {E_{rain} - E_{baseflow}} \right)^2
-    } \\
-    &amp;= \sqrt{
-        u_E^2 
-        \left( \left( \frac{E_{rain} - E_{streamflow}}
-                           {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
-        \left( \frac{E_{streamflow} - E_{baseflow}}
-                    {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
-        \left( \frac{-1}
-                    {E_{rain} - E_{baseflow}} \right)^2 \right)
-    } \\
-    &amp;= \sqrt{
-        u_E^2 
-        \left(\left(\frac{\left( 1 - p_E \right)}
-                         {\left( E_{rain} - E_{baseflow} \right)} \right)^2 +
-              \left(\frac{p_E}
-                         {\left( E_{rain} - E_{baseflow} \right)} \right)^2 +
-              \frac{1}
-                   {\left( E_{rain} - E_{baseflow} \right)^2} \right)
-    } \\
-    &amp;= \sqrt{
-        u_E^2 
-        \left( \frac{\left( 1 - p_E \right)^2}
-                    {\left( E_{rain} - E_{baseflow} \right)^2} +
-               \frac{p_E^2}
-                    {\left( E_{rain} - E_{baseflow} \right)^2} +
-               \frac{1}
-                    {\left( E_{rain} - E_{baseflow} \right)^2} \right)
-    } \\
-    &amp;= \sqrt{
-        u_E^2 \frac{\left( 1 - p_E \right)^2 + p_E^2 + 1}
-                   {\left( E_{rain} - E_{baseflow} \right)^2}
-    } \\
-    &amp;= u_E \frac{\left( 1 - p_E \right) + p_E + 1}
-                {E_{rain} - E_{baseflow}
-    } \\
-\end{align}\]</span>
-<p>So that finally</p>
-<span class="math display">\[\begin{align} \tag{3.2}
-    \therefore u_{p_E} = u_E \frac{2}{E_{rain} - E_{baseflow}}
-\end{align}\]</span>
 <p>With this approach, I get <span class="math inline">\(p_{\delta^{18}O} = 0.99685 \pm 0.1594934\)</span> and <span class="math inline">\(p_{\delta^{2}H} = 1.0259682 \pm 0.1413952\)</span>, such that following (2.3) <span class="math inline">\(p = 1.0114091 \pm 0.1065724\)</span>.</p>
 <p><strong>Problem: <span class="math inline">\(u_p\)</span> from (2.2) ≠ that from (3.2)</strong></p>
 </div>

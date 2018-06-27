@@ -168,60 +168,6 @@ Since we know that, for our analyses, we have identical analytical uncertainty f
     u_{E_{streamflow}} = u_{E_{rain}} = u_{E_{baseflow}} = u_E
 \end{align}
 
-Consequently
-
-\begin{align}
-    u_{p_E} 
-    &= \sqrt{
-        \left( u_E \frac{E_{rain} - E_{streamflow}}
-                        {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
-        \left( u_E \frac{E_{streamflow} - E_{baseflow}}
-                        {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
-        \left( u_E \frac{-1}
-                        {E_{rain} - E_{baseflow}} \right)^2
-    } \\
-    &= \sqrt{
-        u_E^2 
-        \left( \left( \frac{E_{rain} - E_{streamflow}}
-                           {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
-        \left( \frac{E_{streamflow} - E_{baseflow}}
-                    {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
-        \left( \frac{-1}
-                    {E_{rain} - E_{baseflow}} \right)^2 \right)
-    } \\
-    &= \sqrt{
-        u_E^2 
-        \left(\left(\frac{\left( 1 - p_E \right)}
-                         {\left( E_{rain} - E_{baseflow} \right)} \right)^2 +
-              \left(\frac{p_E}
-                         {\left( E_{rain} - E_{baseflow} \right)} \right)^2 +
-              \frac{1}
-                   {\left( E_{rain} - E_{baseflow} \right)^2} \right)
-    } \\
-    &= \sqrt{
-        u_E^2 
-        \left( \frac{\left( 1 - p_E \right)^2}
-                    {\left( E_{rain} - E_{baseflow} \right)^2} +
-               \frac{p_E^2}
-                    {\left( E_{rain} - E_{baseflow} \right)^2} +
-               \frac{1}
-                    {\left( E_{rain} - E_{baseflow} \right)^2} \right)
-    } \\
-    &= \sqrt{
-        u_E^2 \frac{\left( 1 - p_E \right)^2 + p_E^2 + 1}
-                   {\left( E_{rain} - E_{baseflow} \right)^2}
-    } \\
-    &= u_E \frac{\left( 1 - p_E \right) + p_E + 1}
-                {E_{rain} - E_{baseflow}
-    } \\
-\end{align}
-
-So that finally
-
-\begin{align} \tag{3.2}
-    \therefore u_{p_E} = u_E \frac{2}{E_{rain} - E_{baseflow}}
-\end{align}
-
 With this approach, I get $p_{\delta^{18}O} = `r p$d18O` \pm `r u_p_d18O_Genereux`$ and $p_{\delta^{2}H} = `r p$d2H` \pm `r u_p_d2H_Genereux`$, such that following (2.3) $p = `r p_rain_Genereux` \pm `r u_p_rain_Genereux`$.
 
 **Problem: $u_p$ from (2.2) ≠ that from (3.2)**
