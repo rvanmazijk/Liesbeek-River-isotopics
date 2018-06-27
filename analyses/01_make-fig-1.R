@@ -5,9 +5,9 @@ source(here::here("setup.R"))
 
 # Tidy data further for this figure --------------------------------------------
 
+# Make a new `type` column, replacing the old, that = "flow" when
+# source = river & type = amnt (aot d18O or d2H).
 LRD_tidy_fig_1 <- LRD_tidy %>%
-    # Make a new `type` column, replacing the old, that = "flow" when
-    # source = river & type = amnt (aot d18O or d2H).
     gather("type", "amnt", c(d18O, d2H, amnt)) %>%
     mutate(type = as.factor(replace(type,
                                     (source == "River" & type == "amnt"),
@@ -119,16 +119,14 @@ styled_plot <- base_plot +
                    expression(paste(delta^{18}, "O stream (‰)")),
                    expression(paste(delta^{2}, "H rain (‰)")),
                    expression(paste(delta^{2}, "H stream (‰)"))),
-        breaks = LRD_tidy_gather_with_cumul_rain %>%
-            `$`(source_type) %>%
-            factor(levels = c("cum_rain",
-                              "Rain_amnt",
-                              "River_flow",
-                              "Rain_d18O",
-                              "River_d18O",
-                              "Rain_d2H",
-                              "River_d2H")) %>%
-            levels())
+        breaks = levels(factor(LRD_tidy_gather_with_cumul_rain$source_type,
+			       levels = c("cum_rain",
+                                          "Rain_amnt",
+                                          "River_flow",
+                                          "Rain_d18O",
+                                          "River_d18O",
+                                          "Rain_d2H",
+                                          "River_d2H"))))
 
 themed_plot <- styled_plot +
     theme_bw() +
