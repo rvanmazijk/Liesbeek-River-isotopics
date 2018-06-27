@@ -83,7 +83,7 @@ u_p_rain <- abs(p_rain) * (sqrt(u_p$d18O^2 + u_p$d2H^2) / (p$d18O + p$d2H))
 p_rain
 u_p_rain
 
-# Calculations--Genereux 1998 method
+# Calculations--Genereux 1998 method -------------------------------------------
 
 u_p_E <- function(baseflow, rain, streamflow, u) {
     return(sqrt(
