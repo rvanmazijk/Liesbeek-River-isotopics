@@ -1,5 +1,4 @@
-integrate_trapezoid <- function(values, interval_breaks,
-                                method = c("integrate", "average")) {
+integrate_trapezoid <- function(values, interval_breaks) {
     stopifnot(length(values) == length(interval_breaks))
     # Add zeroes to start and end of sequences
     values <- c(0, values, 0)
@@ -16,27 +15,15 @@ integrate_trapezoid <- function(values, interval_breaks,
         (values[1:(length(values) - 1)] +
         values[2:length(values)]) /
         2
-    # Weighted average of those
-    if (method == "average") {
-        interval_weights <-
-            intervals /
-            interval_breaks[length(interval_breaks)]
-        weighted_interval_values <-
-            interval_weights *
-            interval_values
-        average <- sum(weighted_interval_values)
-        return(average)
-    # Or integral...
-    } else if (method == "integrate") {
-        weighted_interval_values <-
-            intervals *
-            interval_values
-        integral <- sum(interval_values)
-        return(integral)
-    }
+    # Calculate integral proper
+    weighted_interval_values <-
+        intervals *
+        interval_values
+    integral <- sum(interval_values)
+    return(integral)
 }
 
 # Tests
-integrate_trapezoid(rep(1, 11), 1:11, "integrate")
-integrate_trapezoid(rep(1, 11), seq(1, 22, 2), "integrate")
+integrate_trapezoid(rep(1, 11), 1:11)
+integrate_trapezoid(rep(1, 11), seq(1, 22, 2))
 # > integrate_trapezoid(0:10, 0:11)
