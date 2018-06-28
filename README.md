@@ -7,7 +7,7 @@
 - [3]: Fitzpatrick Institute of African Ornithology, University of Cape Town, Rondebosch, South Africa
 - [§]: Corresponding author: adam.west@uct.ac.za , +27 21 650 3628
 
-![](logos/UCT-logo.png) ![](logos/BIO-logo.png)
+![](logos/UCT-logo.png) ![](logos/BIO-logo.png) ![](logos/ICWild-logo.jpg) ![](logos/FitzPatrick-logo.png)
 
 This is an open access repository for data-sets and analyses for publication in review in *Water SA*
 
