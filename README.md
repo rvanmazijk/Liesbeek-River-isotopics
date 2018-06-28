@@ -1,10 +1,10 @@
 # Isotopic tracing of storm-water in the urban Liesbeek River
 
-*Ruan van Mazijk, Lucy K. Smyth, Eleanor A. Weideman and Adam G. West^1^*
+*Ruan van Mazijk, Lucy K. Smyth, Eleanor A. Weideman and Adam G. West*
 
 *Department of Biological Sciences, University of Cape Town, Rondebosch, South Africa*
 
-*^1^ Corresponding author: <adam.west@uct.ac.za>, +27 21 650 3628*
+Corresponding author: <adam.west@uct.ac.za>, +27 21 650 3628
 
 ![](logos/UCT-logo.png) ![](logos/BIO-logo.png)
 
