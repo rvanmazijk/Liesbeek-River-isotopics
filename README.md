@@ -19,4 +19,4 @@ These scripts automatically call on `setup.R`, to install all the required packa
 
 Figures should appear in `figures/`, while other outputs appear on the console
 
-Please also see the documentation of our mass-balance model's calculations and uncertainty propagations [here](rvanmazijk.github.io/Liesbeek-River-isotopics/analyses/uncertainty-propagation.html).
+Please also see the documentation of our mass-balance model's calculations and uncertainty propagations [here](https://rvanmazijk.github.io/Liesbeek-River-isotopics/analyses/uncertainty-propagation.html).
