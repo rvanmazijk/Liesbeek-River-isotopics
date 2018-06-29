@@ -1,7 +1,7 @@
 # Fig. 3. Meteoric water plot (d2H vs d18O)
 # Ruan van Mazijk
 
-source(here::here("setup.R"))
+source(here::here("analyses/setup.R"))
 
 # Find LMWL --------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 # Regressing Fig. 2. residuals against time
 # Ruan van Mazijk
 
-source(here::here("setup.R"))
+source(here::here("analyses/setup.R"))
 
 # Import data ------------------------------------------------------------------
 

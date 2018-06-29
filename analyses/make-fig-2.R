@@ -1,7 +1,7 @@
 # Fig. 2. Stream vs rain
 # Ruan van Mazijk
 
-source(here::here("setup.R"))
+source(here::here("analyses/setup.R"))
 
 # Tidy data further for this figure --------------------------------------------
 

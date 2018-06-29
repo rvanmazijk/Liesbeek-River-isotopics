@@ -1,7 +1,7 @@
 # Calculate total streamflow
 # Ruan van Mazijk
 
-source(here::here("setup.R"))
+source(here::here("analyses/setup.R"))
 
 LRD_tidy %>%
   filter(source == "River") %>%

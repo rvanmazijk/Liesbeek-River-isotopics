@@ -1,7 +1,7 @@
 # Mass balance model of rainfall contribution to streamflow
 # Ruan van Mazijk
 
-source(here::here("setup.R"))
+source(here::here("analyses/setup.R"))
 
 # Define baseflow, streamflow and rain isotope values --------------------------
 

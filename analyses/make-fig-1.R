@@ -1,7 +1,7 @@
 # Fig. 1. Storm timeline
 # Ruan van Mazijk, Lucy K. Smyth
 
-source(here::here("setup.R"))
+source(here::here("analyses/setup.R"))
 
 # Tidy data further for this figure --------------------------------------------
 
