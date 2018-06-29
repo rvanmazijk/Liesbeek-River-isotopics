@@ -191,7 +191,7 @@ arranged_panels <- cowplot::plot_grid(
 fig_2 <- arranged_panels
 
 tiff(
-  here::here("figures/fig-2.tiff"),
+  here::here("fig-2.tiff"),
   width = 10, height = 20,
   units = "cm",
   res = 300

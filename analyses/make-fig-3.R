@@ -109,30 +109,30 @@ annotated_plot <- base_plot +
                                            "#205979")) +
   # Text annotations of regression line
   annotate(geom = "text",
-       parse = TRUE,
-       label = paste0("italic(R)^{2} == ",
-                      format(summary(fit_rain)$r.squared,
-                             digits = 3)),
-       x = 0, y = -30,
-       hjust = 1,
-       size = 4,
-       col = "#0f4969") +
+           parse = TRUE,
+           label = paste0("italic(R)^{2} == ",
+                          format(summary(fit_rain)$r.squared,
+                                 digits = 3)),
+           x = 0, y = -30,
+           hjust = 1,
+           size = 4,
+           col = "#0f4969") +
   annotate(geom = "text",
-       parse = TRUE,
-       label = paste0("Slope == ",
-                      format(summary(fit_rain)$coefficients[2],
-                             digits = 4)),
-       x = 0, y = -35,
-       hjust = 1,
-       size = 4,
-       col = "#0f4969") +
+           parse = TRUE,
+           label = paste0("Slope == ",
+                          format(summary(fit_rain)$coefficients[2],
+                                 digits = 4)),
+           x = 0, y = -35,
+           hjust = 1,
+           size = 4,
+           col = "#0f4969") +
   annotate(geom = "text",
-       parse = TRUE,
-       label = paste0("italic(P)[slope] < 0.001"),
-       x = 0, y = -40,
-       hjust = 1,
-       size = 4,
-       col = "#0f4969")
+           parse = TRUE,
+           label = paste0("italic(P)[slope] < 0.001"),
+           x = 0, y = -40,
+           hjust = 1,
+           size = 4,
+           col = "#0f4969")
 
 themed_plot <- annotated_plot +
   theme_bw() +
@@ -143,7 +143,7 @@ themed_plot <- annotated_plot +
 fig_3 <- themed_plot
 
 tiff(
-  here::here("figures/fig-3.tiff"),
+  here::here("fig-3.tiff"),
   width = 15, height = 10,
   units = "cm",
   res = 300

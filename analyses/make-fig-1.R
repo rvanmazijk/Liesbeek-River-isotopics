@@ -132,20 +132,20 @@ styled_plot <- base_plot +
 
 themed_plot <- styled_plot +
   theme_bw() +
-  theme(legend.position    = "left",
-        legend.title       = element_blank(),
-        strip.background   = element_rect(fill = NA, colour = NA),
-        strip.text.y       = element_text(angle = 0),
-        panel.grid         = element_blank(),
+  theme(legend.position = "left",
+        legend.title = element_blank(),
+        strip.background = element_rect(fill = NA, colour = NA),
+        strip.text.y = element_text(angle = 0),
+        panel.grid = element_blank(),
         panel.grid.major.x = element_line(colour = "grey50", linetype = "dashed"),
         panel.grid.minor.x = element_line(colour = "grey75", linetype = "dashed"),
-        axis.text.x        = element_text(angle = 0),
-        axis.title.y       = element_blank())
+        axis.text.x = element_text(angle = 0),
+        axis.title.y = element_blank())
 
 fig_1 <- themed_plot
 
 tiff(
-  here::here("figures/fig-1.tiff"),
+  here::here("fig-1.tiff"),
   width = 25, height = 15,
   units = "cm",
   res = 300
