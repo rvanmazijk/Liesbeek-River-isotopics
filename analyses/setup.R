@@ -16,5 +16,22 @@ extra_sites <- read_csv(here::here("data/extra-sites.csv"))
 
 # Define functions -------------------------------------------------------------
 
-my_functions <- list.files(here::here("functions"), full.names = TRUE)
-map(my_functions, source)
+insert_cumul_rain_type <- function(x) {
+  x$type %<>% as.character()
+  for (i in 1:nrow(x)) {
+    x$type[i] <- if (x$source_type[i] == "cum_rain") "cum_rain" else next
+  }
+  x$type %<>% as.factor()
+  x
+}
+
+total_discharge_steps <- function(Q, t) {
+  # Q = streamflow discharge rate (exclude times w/ no Q value!)
+  # t = time
+  stopifnot(length(Q) == length(t))
+  t <- c(0, t) # To get final Q * (t_{i+1} - t_{i}) vectors to same length
+  sum(
+    Q *
+    (t[2:length(t)] - t[1:(length(t) - 1)])
+  )
+}
