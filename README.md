@@ -13,10 +13,10 @@ This is an open access repository for data-sets and analyses for publication in 
 
 ## How to replicate our results
 
-In R, run each of the R-scripts the `analyses/` in the order numbered. 
+In R, run each of the R-scripts (in `analyses/`).
 
-These scripts automatically call on `setup.R`, to install all the required packages (with [`pacman`](https://cran.r-project.org/web/packages/pacman/vignettes/Introduction_to_pacman.html)), source other code in `functions/`, and load all our data as needed.
+These scripts automatically call on `setup.R`, to install all the required packages (with [`pacman`](https://cran.r-project.org/web/packages/pacman/vignettes/Introduction_to_pacman.html)), define our own functions, and load all our data as needed.
 
-Figures should appear in `figures/`, while other outputs appear on the console
+Figures should appear in the working directory, while other outputs appear on the console.
 
-Please also see the documentation of our mass-balance model's calculations and uncertainty propagations [here](https://rvanmazijk.github.io/Liesbeek-River-isotopics/analyses/uncertainty-propagation.html).
+Note, `uncertainty-propagation.Rmd` is an [R Markdown](https://rmarkdown.rstudio.com/) document. Open this in Studio, and use the "knit" button to generate the HTML report showing the arithmetic behind the propagation of analytical uncertainty in our mass-balance model determination of rainfall contribution to Liesbeek River storm-flow. You can also see this documentation [here](https://rvanmazijk.github.io/Liesbeek-River-isotopics/analyses/uncertainty-propagation.html).
