@@ -15,8 +15,8 @@ This is an open access repository for data-sets and analyses for publication in 
 
 In R, run each of the R-scripts (in `analyses/`).
 
-These scripts automatically call on `setup.R`, to install all the required packages (with [`pacman`](https://cran.r-project.org/web/packages/pacman/vignettes/Introduction_to_pacman.html)), define our own functions, and load all our data as needed.
+These scripts automatically call on `setup.R`, to install all the required packages (with [`pacman`](https://cran.r-project.org/web/packages/pacman/vignettes/Introduction_to_pacman.html)), define our own functions, and load all our data as needed. The exact versions and sources of all the packages we used have been documented by [`packrat`](https://rstudio.github.io/packrat/), a dependency manager for R-projects.
 
-Figures should appear in the working directory, while other outputs appear on the console.
+Figures appear as TIFF-files in the working directory, while other outputs appear on the R-console.
 
-Note, `uncertainty-propagation.Rmd` is an [R Markdown](https://rmarkdown.rstudio.com/) document. Open this in Studio, and use the "knit" button to generate the HTML report showing the arithmetic behind the propagation of analytical uncertainty in our mass-balance model determination of rainfall contribution to Liesbeek River storm-flow. You can also see this documentation [here](https://rvanmazijk.github.io/Liesbeek-River-isotopics/analyses/uncertainty-propagation.html).
+Note, `uncertainty-propagation.Rmd` is an [R Markdown](https://rmarkdown.rstudio.com/) document showing the arithmetic behind the propagation of analytical uncertainty in our mass-balance model determination of rainfall contribution to Liesbeek River storm-flow. It has been rendered to HTML, and is viewable [here](https://rvanmazijk.github.io/Liesbeek-River-isotopics/analyses/uncertainty-propagation.html). Should you wish to render to HTML locally, open `uncertainty-propagation.Rmd` in Studio, and use the "knit" button to generate the HTML report.
