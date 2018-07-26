@@ -59,11 +59,22 @@ Version: 0.2.2
 Hash: 557f908819df9f67af5dc93f501610ab
 Requires: Rcpp, bindr, plogr
 
+Package: bitops
+Source: CRAN
+Version: 1.0-6
+Hash: 67d0775189fd0041d95abca618c5c07e
+
 Package: broom
 Source: CRAN
 Version: 0.4.4
 Hash: dc14fe971ee0fdd4e22b5b1d11611a37
 Requires: dplyr, nlme, plyr, psych, reshape2, stringr, tidyr
+
+Package: caTools
+Source: CRAN
+Version: 1.17.1.1
+Hash: 1764f9cb70825aa7a1c461e7514ffb73
+Requires: bitops
 
 Package: callr
 Source: CRAN
