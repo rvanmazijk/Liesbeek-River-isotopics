@@ -19,4 +19,4 @@ These scripts automatically call on `setup.R`, to install all the required packa
 
 Figures appear as TIFF-files in the working directory, while other outputs appear on the R-console.
 
-Note, `uncertainty-propagation.Rmd` is an [R Markdown](https://rmarkdown.rstudio.com/) document showing the arithmetic behind the propagation of analytical uncertainty in our mass-balance model determination of rainfall contribution to Liesbeek River storm-flow---viewable by rendering to HTML using "knitr".
+Note, `uncertainty-propagation.Rmd` is an [R Markdown](https://rmarkdown.rstudio.com/) document, showing the arithmetic behind how we propagated analytical uncertainty in our mass-balance model (to determine rainfall contribution to Liesbeek River storm-flow). It is viewable [here](analyses/uncertainty-propagation.pdf), or by rendering to HTML using "knitr" and "rmarkdown".
