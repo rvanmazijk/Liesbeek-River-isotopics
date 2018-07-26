@@ -2,7 +2,7 @@
 title: "Isotope analytical uncertainty propagation"
 author: "Ruan van Mazijk"
 output:
-  html_document:
+  pdf_document:
     number_sections: yes
 ---
 
@@ -170,7 +170,7 @@ Since we know that, for our analyses, we have identical analytical uncertainty f
 
 With this approach, I get $p_{\delta^{18}O} = `r p$d18O` \pm `r u_p_d18O_Genereux`$ and $p_{\delta^{2}H} = `r p$d2H` \pm `r u_p_d2H_Genereux`$, such that following (2.3) $p = `r p_rain_Genereux` \pm `r u_p_rain_Genereux`$.
 
-**Problem: $u_p$ from (2.2) ≠ that from (3.2)**
+**Problem: $u_p$ from (2.2) $\ne$ that from (3.2)**
 
 # References {-}
 
