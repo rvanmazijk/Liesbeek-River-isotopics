@@ -1,0 +1,9 @@
+.Rproj.user
+.RData
+.Ruserdata
+*.DS_Store
+*.Rhistory
+packrat/lib*/
+packrat/src/
+*.html
+*.tiff

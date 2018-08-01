@@ -1,0 +1,107 @@
+---
+title: "Isotope analytical uncertainty propagation"
+author: "Ruan van Mazijk"
+output:
+  pdf_document:
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r}
+source(here::here("analyses/mass-balance.R"))
+```
+
+Here I (1) state the uncertainty propagation rules plainly, (2) apply them to our mass-balance model equation and calculate the results, and finally (3) I explore the the derivation of Genereux's (1998) isotopic tracer component uncertainty equations and how they, sadly, differ to my arithmetic propagation in section (2).
+
+# Uncertainty propagation rules
+
+Our uncertainty rules are as follows. Let $q$ be some quantity, and $u_q$ be its uncertainty, where $q$ is a function of variables $x$, $y$ and $z$.
+
+For **constants**
+
+\begin{align*} \tag{1.1} \label{1.1}
+  q &= Bx \\
+  \frac{u_q}{q} &= \frac{u_x}{x}
+\end{align*}
+
+For **sums**
+
+\begin{align*} \tag{1.2} \label{1.2}
+  q &= x \pm y \pm z \\
+  u_q &= \sqrt{u_x^2 +u_y^2 + u_z^2}
+\end{align*}
+
+And for **products/quotients**
+
+\begin{align*} \tag{1.3} \label{1.3}
+  q &= xyz \\
+  \frac{u_q}{|q|} &= \sqrt{
+    \left( \frac{u_x}{x} \right)^2 +
+    \left( \frac{u_y}{y} \right)^2 +
+    \left( \frac{u_z}{z} \right)^2
+  }
+\end{align*}
+
+\break
+
+# Genereux's (1998) uncertainty propagation
+
+Let $p_E$ be the proportion of streamflow derived from rainfall according to an isotope $E$, where
+
+\begin{align*} \tag{2.1} \label{2.1}
+  p_E = \frac{E_{streamflow} - E_{baseflow}}
+                {E_{rain} - E_{baseflow}}
+\end{align*}
+
+We then average $p_{\delta^{2}H}$ and $p_{\delta^{18}O}$, each with their own uncertainty derived above, as follows
+
+\begin{align*} \tag{2.2} \label{2.2} 
+  p &= \frac{p_{\delta^{18}O} + p_{\delta^{2}H}}
+            {2} \\
+  \therefore
+  u_p &= |p| \frac{\sqrt{u_{p_{\delta^{18}O}} + u_{p_{\delta^{2}H}}}}
+                  {p_{\delta^{18}O} + p_{\delta^{2}H}} 
+\end{align*}
+
+For our study, we combined long term analytical precision and accuracy using Equation \ref{1.2}
+
+\begin{align*} 
+  u_{\delta^{18}O}
+    &= \sqrt{`r precision$d18O^2` + `r accuracy$d18O^2`} \\
+    &= `r u$d18O` \\ 
+  u_{\delta^{2}H} 
+    &= \sqrt{`r precision$d2H^2` + `r accuracy$d2H^2`} \\
+    &= `r u$d2H`
+\end{align*}
+
+Knowing Equations \ref{1.1}--\ref{1.3}, applying them to Equation \ref{2.1} Genereux derived the following (see Equation 4 in Genereux 1998)
+
+\begin{align*}
+  u_{p_E} = \sqrt{
+    \left( u_{E_{baseflow}} \frac{E_{rain} - E_{streamflow}}
+                                 {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
+    \left( u_{E_{rain}} \frac{E_{streamflow} - E_{baseflow}}
+                             {\left( E_{rain} - E_{baseflow} \right)^2} \right)^2 +
+    \left( u_{E_{streamflow}} \frac{-1}
+                                   {E_{rain} - E_{baseflow}} \right)^2
+  }
+\end{align*}
+
+Since we know that, for our analyses, we have identical analytical uncertainty for any measurement of an isotope $E$, such that
+
+\begin{align*}
+  u_{E_{streamflow}} = u_{E_{rain}} = u_{E_{baseflow}} = u_E
+\end{align*}
+
+With this approach, I get $p_{\delta^{18}O} = `r p$d18O` \pm `r u_p_d18O_Genereux`$ and $p_{\delta^{2}H} = `r p$d2H` \pm `r u_p_d2H_Genereux`$, such that following Equation \ref{2.2} $p = `r p_rain_Genereux` \pm `r u_p_rain_Genereux`$.
+
+# References {-}
+
+Genereux (1998) *Water Resources Research* 34(4):915--919
