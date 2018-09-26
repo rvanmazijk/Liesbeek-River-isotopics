@@ -82,7 +82,10 @@ u_p_rain_Genereux <-  abs(p_rain_Genereux) *
   (sqrt(u_p_d18O_Genereux^2 + u_p_d2H_Genereux^2) / (p$d18O + p$d2H))
 
 # Done
-u_p_d18O_Genereux
-u_p_d2H_Genereux
-p_rain_Genereux
-u_p_rain_Genereux
+message(paste(
+  "The proportion of streamflow derived from rainfall is:",
+  "\n    According to d18O:            ", p$d18O, "+-", u_p_d18O_Genereux,
+  "\n    According to d2H:             ", p$d2H, "+-", u_p_d2H_Genereux,
+  "\n    Therefore, average proportion:", p_rain_Genereux, "+-", u_p_rain_Genereux
+))
+
