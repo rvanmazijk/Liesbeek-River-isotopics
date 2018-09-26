@@ -1,4 +1,4 @@
-# Isotopic tracing of storm-water in the urban Liesbeek River
+# Isotopic tracing of stormwater in the urban Liesbeek River
 
 *Ruan van Mazijk[1], Lucy K. Smyth[1,2], Eleanor A. Weideman[1,3] and Adam G. West[1,§]*
 
