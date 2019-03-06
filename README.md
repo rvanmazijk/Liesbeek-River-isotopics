@@ -1,5 +1,7 @@
 # Isotopic tracing of stormwater in the urban Liesbeek River
 
+Water SA 44(4):674-679. DOI: [10.4314/wsa.v44i4.16](http://dx.doi.org/10.4314/wsa.v44i4.16)
+
 *Ruan van Mazijk[1], Lucy K. Smyth[1,2], Eleanor A. Weideman[1,3] and Adam G. West[1,§]*
 
 - [1] Department of Biological Sciences, University of Cape Town, Rondebosch, South Africa
@@ -8,10 +10,10 @@
 - [§] Corresponding author: adam.west@uct.ac.za , +27 21 650 3628
 
 <p>
-  <img src="logos/UCT-logo.png" height=100/>
-  <img src="logos/BIO-logo.png" height=100/>
-  <img src="logos/ICWild-logo.jpg" height100/>
-  <img src="logos/FitzPatrick-logo.png" height=100/>
+  <img src="logos/UCT-logo.png"         height=100 />
+  <img src="logos/BIO-logo.png"         height=100 />
+  <img src="logos/ICWild-logo.jpg"      height100  />
+  <img src="logos/FitzPatrick-logo.png" height=100 />
 </p>
 
 This is an open access repository for data-sets and analyses for publication in review in *Water SA*
