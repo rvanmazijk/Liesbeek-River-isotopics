@@ -38,7 +38,7 @@ Once this is done, you can run the R-scripts in `analyses/`. These scripts autom
 
 ### On the command line
 
-Navigate to the project on the command line, substituting the appropriate path:
+Assuming you are using a Unix-like system, navigate to the project directory on the command line, using the appropriate path on your machine, which should look something like this:
 
 ```sh
 cd ~/mypath/Liesbeek-River-isotopics/
@@ -56,4 +56,3 @@ Once this is done, you can run the R-scripts in `analyses/`. These scripts autom
 Rscript analyses/make-fig-1.R
 Rscript analyses/mass-balance.R
 ```
-
