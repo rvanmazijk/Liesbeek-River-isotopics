@@ -12,7 +12,7 @@ Water SA 44(4):674-679. DOI: [10.4314/wsa.v44i4.16](http://dx.doi.org/10.4314/ws
 <p>
   <img src="logos/UCT-logo.png"         height=100 />
   <img src="logos/BIO-logo.png"         height=100 />
-  <img src="logos/ICWild-logo.jpg"      height100  />
+  <img src="logos/ICWild-logo.jpg"      height=100 />
   <img src="logos/FitzPatrick-logo.png" height=100 />
 </p>
 
